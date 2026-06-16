@@ -1,0 +1,136 @@
+:root {
+    --bg-app: #f1f5f9;
+    --bg-card: #ffffff;
+    --sidebar-dark: #1e293b;
+    --border-color: #cbd5e1;
+    --text-main: #334155;
+    --accent-blue: #2563eb;
+    --accent-green: #10b981;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.app-layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Sidebar Layout & Control styling */
+.sidebar {
+    width: 320px;
+    background-color: var(--sidebar-dark);
+    color: #f8fafc;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    box-sizing: border-box;
+}
+
+.brand h2 { margin: 0; font-size: 1.5rem; color: #60a5fa; }
+.brand p { margin: 4px 0 0 0; font-size: 0.85rem; color: #94a3b8; }
+
+.metrics-panel {
+    background: #0f172a;
+    padding: 20px;
+    border-radius: 10px;
+}
+.metrics-panel h3 { margin: 0 0 10px 0; font-size: 0.9rem; color: #94a3b8; text-transform: uppercase; }
+.badge-count { font-size: 1.8rem; font-weight: bold; margin-bottom: 12px; color: var(--accent-green); }
+
+.progress-bar-bg { background: #334155; height: 8px; border-radius: 4px; overflow: hidden; }
+#progress-bar-fill { width: 0%; height: 100%; background: var(--accent-green); transition: width 0.3s ease; }
+
+.db-actions { display: flex; flex-direction: column; gap: 12px; }
+.db-actions h3 { font-size: 0.85rem; text-transform: uppercase; color: #64748b; margin: 0 0 4px 0; }
+
+.btn-action {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    transition: background 0.2s;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn-action input { display: none; }
+.btn-action.primary { background: var(--accent-blue); }
+.btn-action.primary:hover { background: #1d4ed8; }
+.btn-action.success { background: var(--accent-green); }
+.btn-action.success:hover { background: #059669; }
+.btn-action.secondary { background: #475569; font-size: 0.85rem; }
+.btn-action.secondary:hover { background: #334155; }
+
+.file-info { font-size: 0.8rem; color: #94a3b8; text-align: center; margin-top: -4px; }
+.divider { border: 0; border-top: 1px solid #334155; margin: 8px 0; }
+
+/* Main Content Workspace */
+.content-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content-header { background: var(--bg-card); padding: 24px 40px; border-bottom: 1px solid #e2e8f0; }
+.content-header h1 { margin: 0; font-size: 1.6rem; color: #0f172a; }
+.content-header p { margin: 4px 0 0 0; color: #64748b; }
+
+.days-container { padding: 40px; overflow-y: auto; flex-grow: 1; display: flex; flex-direction: column; gap: 24px; box-sizing: border-box; }
+.prompt-state { text-align: center; color: #64748b; margin-top: 60px; font-size: 1.1rem; line-height: 1.6; }
+
+/* Day Cards Grid layout */
+.day-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    transition: all 0.25s ease;
+}
+.day-card-header {
+    background: #f8fafc;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.day-card-header h2 { margin: 0; font-size: 1.15rem; color: #0f172a; }
+.day-status-label { font-size: 0.8rem; font-weight: bold; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; background: #e2e8f0; color: #64748b; }
+
+/* Checklist rows inside each day */
+.todo-row {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    cursor: pointer;
+}
+.todo-row:last-child { border-bottom: none; }
+.todo-row:hover { background: #f8fafc; }
+.todo-row input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; margin-right: 16px; accent-color: var(--accent-green); cursor: pointer; }
+
+.todo-details { flex-grow: 1; }
+.todo-category { font-size: 0.75rem; font-weight: bold; color: var(--accent-blue); text-transform: uppercase; margin-bottom: 2px; }
+.todo-text { font-size: 0.95rem; color: #334155; line-height: 1.4; }
+
+/* Completed Item styling overrides */
+.todo-row.checked .todo-text { text-decoration: line-through; color: #94a3b8; }
+.todo-row.checked .todo-category { color: #94a3b8; }
+
+/* Day Completed State Highlight */
+.day-card.day-complete { border-color: var(--accent-green); }
+.day-card.day-complete .day-card-header { background: #f0fdf4; }
+.day-card.day-complete .day-status-label { background: var(--accent-green); color: white; }

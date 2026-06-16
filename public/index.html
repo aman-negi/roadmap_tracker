@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Day Interview Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <h2>📅 Day Tracker</h2>
+            <p>50 Day Interview Roadmap</p>
+        </div>
+
+        <div class="metrics-panel">
+            <h3>Days Completed</h3>
+
+            <div
+                class="badge-count"
+                id="days-completed-count"
+            >
+                0 / 50 Days
+            </div>
+
+            <div class="progress-bar-bg">
+                <div id="progress-bar-fill"></div>
+            </div>
+        </div>
+
+    </aside>
+
+    <main class="content-area">
+
+        <header class="content-header">
+            <h1>Interview Preparation Tracker</h1>
+
+            <p>
+                Progress is automatically saved to
+                progress.json
+            </p>
+        </header>
+
+        <div
+            id="days-container"
+            class="days-container"
+        >
+            <div class="prompt-state">
+                Loading roadmap...
+            </div>
+        </div>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
