@@ -1,3 +1,6 @@
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
+require("dotenv").config();
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
@@ -12,10 +15,14 @@ app.use(express.static("public"));
 
 const ROADMAP_FILE = "./data/roadmap.csv";
 
+
 // 1. Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("✅ Connected to MongoDB Atlas"))
-    .catch(err => console.error("❌ MongoDB connection error:", err));
+    .catch(err => {
+    console.error(err);
+    console.error(err.stack);
+});
 
 // 2. Define a flexible Schema to hold your JSON progress
 const progressSchema = new mongoose.Schema({
@@ -49,7 +56,7 @@ app.post("/api/progress", async (req, res) => {
         await Progress.findOneAndUpdate(
             { userId: "aman_admin" },
             { data: req.body },
-            { upsert: true, new: true }
+            { upsert: true, returnDocument: "after" } 
         );
 
         res.json({ success: true });
