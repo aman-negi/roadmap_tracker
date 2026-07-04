@@ -240,11 +240,31 @@ function renderDayWiseDashboard() {
 
                 </div>
             `;
+            // ... (previous code where label.innerHTML is set)
 
-            const checkbox =
-                label.querySelector(
-                    "input"
-                );
+            const checkbox = label.querySelector("input");
+
+            // --- ADD THIS NEW BLOCK FOR CLIPBOARD COPYING ---
+            label.addEventListener("click", (e) => {
+                // Ignore clicks directly on the checkbox so it doesn't copy when just checking it off
+                if (e.target.tagName.toLowerCase() === 'input') return;
+
+                // Copy the specific task content to the clipboard
+                navigator.clipboard.writeText(task.content).then(() => {
+                    const textDiv = label.querySelector(".todo-text");
+                    const originalHTML = textDiv.innerHTML;
+                    
+                    // Show a quick visual confirmation
+                    textDiv.innerHTML = `<span style="color: var(--accent-green); font-weight: bold;">✓ Copied to clipboard!</span>`;
+                    
+                    // Revert back to the original text after 800 milliseconds
+                    setTimeout(() => {
+                        textDiv.innerHTML = originalHTML;
+                    }, 800);
+                }).catch(err => {
+                    console.error("Failed to copy text: ", err);
+                });
+            });
 
             checkbox.addEventListener(
                 "change",
