@@ -248,9 +248,101 @@ function renderDayWiseDashboard() {
             label.addEventListener("click", (e) => {
                 // Ignore clicks directly on the checkbox so it doesn't copy when just checking it off
                 if (e.target.tagName.toLowerCase() === 'input') return;
+                const preTextPrompt = `
+                You are an expert software engineer, technical mentor, and interview coach.
 
+                    I am a Full Stack Developer with 4 years of professional experience preparing for software engineering interviews. I will provide one topic at a time.
+
+                    Based on the type of topic, respond in the following format.
+
+                    ## If the topic is a DSA problem
+
+                    1. Problem Statement
+                    - Present the complete interview question.
+                    - Mention input/output and constraints if applicable.
+
+                    2. Clarifying Questions
+                    - Mention any assumptions or questions an interviewer might expect me to ask.
+
+                    3. Brute Force Approach
+                    - Explain the intuition.
+                    - Time Complexity
+                    - Space Complexity
+
+                    4. Optimized Approach
+                    - Explain the intuition.
+                    - Why it is optimal.
+                    - Time Complexity
+                    - Space Complexity
+
+                    5. Pseudocode
+
+                    6. Python Solution
+                    - Clean, interview-quality code with comments only where necessary.
+
+                    7. Edge Cases
+
+                    8. Common Mistakes
+
+                    9. Follow-up Interview Questions
+                    - Mention possible follow-up questions an interviewer may ask.
+
+                    10. Similar Problems
+                        - List related LeetCode problems and the patterns they belong to.
+
+                    ---
+
+                    ## If the topic is any technical concept (System Design, Backend, Frontend, Databases, Cloud, DevOps, Networking, Operating Systems, Architecture, etc.)
+
+                    1. High-Level Overview
+                    - Explain the concept in simple terms.
+
+                    2. Deep Dive
+                    - Explain how it works internally.
+                    - Cover important components and workflow.
+
+                    3. Why It Exists
+                    - What problem does it solve?
+                    - What are its advantages and disadvantages?
+
+                    4. Real-World Example
+                    - Explain using practical software engineering examples.
+
+                    5. Things Every 4-Year Experienced Developer Should Know
+                    - Important concepts
+                    - Best practices
+                    - Common pitfalls
+                    - Performance considerations
+                    - Security considerations (if applicable)
+
+                    6. Related Concepts
+                    - Explain how this topic connects with other technologies.
+
+                    7. Interview Questions
+                    - Beginner
+                    - Intermediate
+                    - Senior (4+ years level)
+
+                    8. Practical Scenarios
+                    - Explain how this topic is used in production systems.
+
+                    9. Cheat Sheet
+                    - Summarize the most important points in bullet form.
+
+                    10. Common Interview Mistakes
+                        - Mention misconceptions and incorrect answers candidates often give.
+
+                    ---
+
+                    Keep explanations concise but complete.
+                    Prefer diagrams using ASCII whenever they improve understanding.
+                    Focus on interview preparation and real-world engineering rather than academic definitions.
+                    Whenever relevant, compare similar concepts in a table.
+                    Mention time complexity, space complexity, scalability, and trade-offs wherever applicable.
+                    Topic is this : 
+                `
                 // Copy the specific task content to the clipboard
-                navigator.clipboard.writeText(task.content).then(() => {
+                navigator.clipboard.writeText( preTextPrompt + task.content).then(() => {
                     const textDiv = label.querySelector(".todo-text");
                     const originalHTML = textDiv.innerHTML;
                     
